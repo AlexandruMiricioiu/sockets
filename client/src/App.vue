@@ -4,6 +4,21 @@
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import SocketioService from '@/services/socketio.service.js'
 
-</style>
+export default {
+  name: 'App',
+  components: {},
+  created() {
+    SocketioService.setupSocketConnection()
+  },
+  beforeUnmount() {
+    SocketioService.disconnect()
+  }
+}
+
+// socket.onAny((event, ...args) => {
+//   console.log(event, args)
+// })
+</script>
