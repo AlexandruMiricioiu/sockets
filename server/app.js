@@ -21,28 +21,10 @@ app.use(routes)
 
 const port = 4000
 const server = require('http').createServer(app)
-const io = require('socket.io')(server, {
-  cors: {
-    origin: "http://localhost:8080",
-  },
-})
 
-
-io.on('connection', (socket) => {
-  let handshake = socket.handshake
-
-  // console.log(handshake)
-  console.log('a user connected')
-
-  socket.on('disconnect', () => {
-    console.log('user disconnected')
-  })
-
-  socket.on('my message', (msg) => {
-    console.log('message: ' + msg)
-    io.emit('my broadcast', `server: ${msg}`)
-  })
-})
-
+const socket = require('./socket')
+socket.connect(server)
 
 server.listen(port, () => console.log(`Server started on port ${port}`))
+
+const emitComponent = require('./components/ioSocketEmitComponent')

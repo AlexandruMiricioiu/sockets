@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+const test = require('../components/ioSocketEmitComponent')
 
-router.get('/', (req, res) => {
-  res.status(200).send('hello')
-})
+
+router.get('/', test.test)
 
 
 module.exports = router
