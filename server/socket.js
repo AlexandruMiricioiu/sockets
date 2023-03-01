@@ -11,7 +11,14 @@ class Socket {
     const io = require('socket.io')(server, {
       cors: {
         origin: "http://localhost:8080",
+        credentials: true
       },
+    })
+
+    io.use((socket, next) => {
+      console.log(socket.handshake.headers.cookie)
+
+      next()
     })
 
     io.on('connection', (socket) => {

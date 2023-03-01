@@ -7,7 +7,9 @@ class SocketioService {
   constructor() {}
 
   setupSocketConnection() {
-    this.socket = io(URL)
+    this.socket = io(URL, {
+      withCredentials: true
+    })
 
     this.socket.emit('my message', 'Hello there from Vue.')
 
